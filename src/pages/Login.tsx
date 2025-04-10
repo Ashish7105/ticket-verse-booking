@@ -28,7 +28,7 @@ const Login = () => {
           title: "Login successful",
           description: "Welcome back!",
         });
-        navigate("/movies");
+        navigate("/"); // Navigate to home page instead of movies
       } else {
         toast({
           title: "Login failed",
@@ -49,17 +49,17 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[80vh]">
-      <Card className="w-full max-w-md bg-black/40 backdrop-blur-md border-muted">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Sign In</CardTitle>
-          <CardDescription className="text-center">
+      <Card className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg border border-gray-200">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl text-center text-gray-800">Sign In</CardTitle>
+          <CardDescription className="text-center text-gray-600">
             Enter your credentials to access your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-700">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -67,13 +67,13 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
-                <Link to="#" className="text-xs text-ticket-purple hover:underline">
+                <Label htmlFor="password" className="text-gray-700">Password</Label>
+                <Link to="#" className="text-xs text-ticket-purple hover:text-ticket-secondary hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -84,12 +84,12 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-ticket-purple hover:bg-ticket-secondary" 
+              className="w-full bg-ticket-purple hover:bg-ticket-secondary transition-colors" 
               disabled={isLoading}
             >
               {isLoading ? "Signing in..." : "Sign In"}
@@ -97,9 +97,9 @@ const Login = () => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <p className="text-sm text-ticket-gray">
+          <p className="text-sm text-gray-600">
             Don't have an account?{" "}
-            <Link to="/register" className="text-ticket-purple hover:underline">
+            <Link to="/register" className="text-ticket-purple hover:text-ticket-secondary hover:underline">
               Sign up
             </Link>
           </p>

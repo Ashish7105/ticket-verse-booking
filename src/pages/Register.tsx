@@ -40,7 +40,7 @@ const Register = () => {
           title: "Registration successful",
           description: "Welcome to TicketVerse!",
         });
-        navigate("/movies");
+        navigate("/"); // Navigate to home page instead of movies
       } else {
         toast({
           title: "Registration failed",
@@ -61,17 +61,17 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center min-h-[80vh]">
-      <Card className="w-full max-w-md bg-black/40 backdrop-blur-md border-muted">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">Create Account</CardTitle>
-          <CardDescription className="text-center">
+      <Card className="w-full max-w-md bg-white/90 backdrop-blur-sm shadow-lg border border-gray-200">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl text-center text-gray-800">Create Account</CardTitle>
+          <CardDescription className="text-center text-gray-600">
             Enter your details to create a new account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name" className="text-gray-700">Full Name</Label>
               <Input
                 id="name"
                 type="text"
@@ -79,11 +79,11 @@ const Register = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="text-gray-700">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -91,11 +91,11 @@ const Register = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-gray-700">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -103,11 +103,11 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="confirm-password">Confirm Password</Label>
+              <Label htmlFor="confirm-password" className="text-gray-700">Confirm Password</Label>
               <Input
                 id="confirm-password"
                 type="password"
@@ -115,12 +115,12 @@ const Register = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 required
-                className="bg-muted"
+                className="bg-white border-gray-300"
               />
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-ticket-purple hover:bg-ticket-secondary" 
+              className="w-full bg-ticket-purple hover:bg-ticket-secondary transition-colors" 
               disabled={isLoading}
             >
               {isLoading ? "Creating Account..." : "Create Account"}
@@ -128,9 +128,9 @@ const Register = () => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
-          <p className="text-sm text-ticket-gray">
+          <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <Link to="/login" className="text-ticket-purple hover:underline">
+            <Link to="/login" className="text-ticket-purple hover:text-ticket-secondary hover:underline">
               Sign in
             </Link>
           </p>

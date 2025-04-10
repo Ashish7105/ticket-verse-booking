@@ -5,14 +5,14 @@
 
 @layer base {
   :root {
-    --background: 223 18% 13%;
-    --foreground: 0 0% 98%;
+    --background: 240 10% 95%;
+    --foreground: 223 10% 20%;
 
-    --card: 223 18% 13%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 223 10% 20%;
 
-    --popover: 223 18% 13%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 223 10% 20%;
 
     --primary: 262 83% 74%;
     --primary-foreground: 0 0% 100%;
@@ -20,18 +20,18 @@
     --secondary: 262 27% 54%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 223 10% 24%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 240 5% 90%;
+    --muted-foreground: 240 5% 45%;
 
-    --accent: 223 10% 24%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 240 5% 96%;
+    --accent-foreground: 223 10% 20%;
 
     --destructive: 0 63% 31%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 223 10% 24%;
-    --input: 223 10% 24%;
-    --ring: 240 5% 84%;
+    --border: 240 6% 85%;
+    --input: 240 5% 90%;
+    --ring: 262 83% 74%;
     --radius: 0.75rem;
   }
 
@@ -40,17 +40,17 @@
   }
 
   body {
-    @apply bg-ticket-dark text-foreground antialiased;
-    background-image: radial-gradient(circle at 1px 1px, rgba(155, 135, 245, 0.1) 1px, transparent 0);
+    @apply bg-slate-50 text-foreground antialiased;
+    background-image: radial-gradient(circle at 1px 1px, rgba(155, 135, 245, 0.15) 1px, transparent 0);
     background-size: 40px 40px;
   }
 
   .glass-card {
-    @apply bg-black/30 backdrop-blur-sm border border-white/10 shadow-lg;
+    @apply bg-white/80 backdrop-blur-sm border border-gray-100 shadow-md;
   }
   
   .glass-morphism {
-    @apply bg-black/40 backdrop-blur-md border border-white/5 shadow-lg;
+    @apply bg-white/70 backdrop-blur-md border border-gray-100 shadow-md;
   }
   
   .seat {
@@ -58,19 +58,19 @@
   }
   
   .seat-available {
-    @apply bg-ticket-available text-white hover:bg-ticket-purple;
+    @apply bg-gray-300 text-gray-700 hover:bg-ticket-purple hover:text-white;
   }
   
   .seat-selected {
-    @apply bg-ticket-selected text-white;
+    @apply bg-emerald-500 text-white;
   }
   
   .seat-booked {
-    @apply bg-ticket-booked text-white cursor-not-allowed opacity-50;
+    @apply bg-red-400 text-white cursor-not-allowed opacity-50;
   }
   
   .screen {
-    @apply h-3 bg-ticket-blue rounded-lg w-3/4 mx-auto mb-10 shadow-lg shadow-ticket-blue/50;
+    @apply h-3 bg-blue-400 rounded-lg w-3/4 mx-auto mb-10 shadow-lg shadow-blue-300/50;
   }
 
   /* Enhanced animations */
@@ -102,5 +102,23 @@
       transform: scale(1);
       opacity: 1;
     }
+  }
+
+  /* Card hover effects */
+  .hover-card {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  /* Button hover animations */
+  .btn-animate {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+  
+  .btn-animate:after {
+    @apply content-[''] absolute top-0 left-[-100%] z-[-1] w-full h-full bg-white/20 transition-all duration-300 transform skew-x-[-15deg];
+  }
+  
+  .btn-animate:hover:after {
+    @apply left-0;
   }
 }
