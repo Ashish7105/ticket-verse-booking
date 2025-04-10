@@ -1,5 +1,36 @@
 
-import { Movie, Theater, ShowTime, Seat } from "@/context/BookingContext";
+import { Booking } from "@/context/BookingContext";
+
+// Explicitly define and export the types here
+export interface Movie {
+  id: string;
+  title: string;
+  poster: string;
+  duration: string;
+  genre: string;
+  rating: string;
+}
+
+export interface Theater {
+  id: string;
+  name: string;
+  location: string;
+  city: string;
+}
+
+export interface ShowTime {
+  id: string;
+  time: string;
+  date: string;
+  price: number;
+}
+
+export interface Seat {
+  id: string;
+  row: string;
+  number: number;
+  status: "available" | "selected" | "booked";
+}
 
 export const cities = ["New York", "Los Angeles", "Chicago", "Houston", "Miami"];
 

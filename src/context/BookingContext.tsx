@@ -1,35 +1,5 @@
-
 import React, { createContext, useState, useContext } from "react";
-
-export interface Movie {
-  id: string;
-  title: string;
-  poster: string;
-  duration: string;
-  genre: string;
-  rating: string;
-}
-
-export interface Theater {
-  id: string;
-  name: string;
-  location: string;
-  city: string;
-}
-
-export interface ShowTime {
-  id: string;
-  time: string;
-  date: string;
-  price: number;
-}
-
-export interface Seat {
-  id: string;
-  row: string;
-  number: number;
-  status: "available" | "selected" | "booked";
-}
+import { Movie, Theater, ShowTime, Seat } from "@/services/mockData";
 
 export interface Booking {
   movieId?: string;
