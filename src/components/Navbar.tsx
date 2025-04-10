@@ -15,11 +15,13 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="bg-white border-b border-gray-200 py-4 shadow-sm">
+    <nav className="bg-white border-b border-slate-200 py-4 shadow-sm sticky top-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <Film className="h-6 w-6 text-ticket-purple" />
-          <span className="text-xl font-bold bg-gradient-to-r from-ticket-purple to-ticket-secondary bg-clip-text text-transparent">
+          <div className="bg-primary/10 p-2 rounded-full">
+            <Film className="h-6 w-6 text-primary" />
+          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
             TicketVerse
           </span>
         </Link>
@@ -27,18 +29,18 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4">
           {isAuthenticated ? (
             <>
-              <span className="text-gray-700">
+              <span className="hidden md:block text-slate-700">
                 Welcome, {user?.name || "User"}
               </span>
               <Link to="/movies">
-                <Button variant="outline" className="border-ticket-purple text-ticket-purple hover:bg-ticket-purple hover:text-white">
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
                   Browse Movies
                 </Button>
               </Link>
               <Button 
                 onClick={handleLogout} 
                 variant="outline" 
-                className="border-gray-300 text-gray-700 hover:bg-gray-100"
+                className="border-slate-300 text-slate-700 hover:bg-slate-100"
               >
                 Logout
               </Button>
@@ -46,12 +48,12 @@ const Navbar: React.FC = () => {
           ) : (
             <>
               <Link to="/login">
-                <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-100">
+                <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-100">
                   Login
                 </Button>
               </Link>
               <Link to="/register">
-                <Button className="bg-ticket-purple hover:bg-ticket-secondary transition-colors">
+                <Button className="bg-primary hover:bg-primary/90 transition-colors">
                   Sign Up
                 </Button>
               </Link>

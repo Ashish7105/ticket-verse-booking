@@ -65,9 +65,9 @@ export default {
 				},
 				ticket: {
 					dark: '#1A1F2C',
-					purple: '#9b87f5',
-					secondary: '#7E69AB',
-					gray: '#8E9196',
+					purple: '#7c4dff',
+					secondary: '#5e35b1',
+					gray: '#64748b',
 					blue: '#1EAEDB',
 					available: '#4a5568',
 					selected: '#48bb78',
@@ -122,6 +122,18 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
 				'scale-in': 'scale-in 0.2s ease-out'
+			},
+			typography: {
+				DEFAULT: {
+					css: {
+						a: {
+							color: 'hsl(var(--primary))',
+							'&:hover': {
+								color: 'hsl(var(--primary))'
+							},
+						}
+					}
+				}
 			}
 		}
 	},

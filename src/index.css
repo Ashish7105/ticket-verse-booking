@@ -5,33 +5,33 @@
 
 @layer base {
   :root {
-    --background: 240 10% 95%;
-    --foreground: 223 10% 20%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 223 10% 20%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 223 10% 20%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 262 83% 74%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 262 27% 54%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 240 5% 90%;
-    --muted-foreground: 240 5% 45%;
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 240 5% 96%;
-    --accent-foreground: 223 10% 20%;
+    --accent: 262 83% 96%;
+    --accent-foreground: 222 47% 11%;
 
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 240 6% 85%;
-    --input: 240 5% 90%;
-    --ring: 262 83% 74%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 262 83% 58%;
     --radius: 0.75rem;
   }
 
@@ -40,17 +40,19 @@
   }
 
   body {
-    @apply bg-slate-50 text-foreground antialiased;
-    background-image: radial-gradient(circle at 1px 1px, rgba(155, 135, 245, 0.15) 1px, transparent 0);
+    @apply bg-white text-foreground antialiased;
+    background-image: 
+      linear-gradient(rgba(246, 245, 251, 0.8) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(246, 245, 251, 0.8) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
   .glass-card {
-    @apply bg-white/80 backdrop-blur-sm border border-gray-100 shadow-md;
+    @apply bg-white/95 backdrop-blur-sm border border-slate-100 shadow-md rounded-xl;
   }
   
   .glass-morphism {
-    @apply bg-white/70 backdrop-blur-md border border-gray-100 shadow-md;
+    @apply bg-white/90 backdrop-blur-md border border-slate-100 shadow-md rounded-xl;
   }
   
   .seat {
@@ -58,7 +60,7 @@
   }
   
   .seat-available {
-    @apply bg-gray-300 text-gray-700 hover:bg-ticket-purple hover:text-white;
+    @apply bg-slate-200 text-slate-700 hover:bg-primary hover:text-white;
   }
   
   .seat-selected {
@@ -70,7 +72,7 @@
   }
   
   .screen {
-    @apply h-3 bg-blue-400 rounded-lg w-3/4 mx-auto mb-10 shadow-lg shadow-blue-300/50;
+    @apply h-3 bg-primary rounded-lg w-3/4 mx-auto mb-10 shadow-lg shadow-primary/20;
   }
 
   /* Enhanced animations */
@@ -120,5 +122,57 @@
   
   .btn-animate:hover:after {
     @apply left-0;
+  }
+
+  /* Movie card */
+  .movie-card {
+    @apply rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100;
+  }
+
+  .movie-card:hover {
+    transform: translateY(-5px) scale(1.01);
+  }
+
+  .movie-card .poster {
+    @apply aspect-[2/3] object-cover w-full relative overflow-hidden;
+  }
+
+  .movie-card .content {
+    @apply p-4;
+  }
+
+  /* Banner gradient */
+  .banner-gradient {
+    background: linear-gradient(to right, rgba(120, 80, 228, 0.8), rgba(83, 56, 158, 0.8));
+  }
+
+  /* Features section */
+  .feature-card {
+    @apply p-6 rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .feature-icon {
+    @apply h-12 w-12 text-primary mb-4 p-2 rounded-full bg-primary/10;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl;
   }
 }

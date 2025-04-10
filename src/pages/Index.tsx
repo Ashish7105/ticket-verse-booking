@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { movies } from "@/services/mockData";
-import { Film } from "lucide-react";
+import { Film, Calendar, CreditCard, Clock, ShieldCheck } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -20,22 +20,21 @@ const Index = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-white">
-                Book Your Movie Tickets with Ease
-              </h1>
-              <p className="mx-auto max-w-[700px] text-ticket-gray md:text-xl">
-                Experience the magic of cinema with our seamless booking platform.
-                Choose from the latest movies and reserve your perfect seats.
-              </p>
-            </div>
-            <div className="space-x-4">
+      {/* Hero Section */}
+      <section className="w-full py-16 md:py-24 bg-gradient-to-r from-primary/90 to-secondary/90 text-white">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="flex flex-col items-center space-y-6 text-center max-w-3xl mx-auto">
+            <Film className="h-16 w-16 mb-2 animate-scale-in" />
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter">
+              Your Cinema Experience, Simplified
+            </h1>
+            <p className="text-lg md:text-xl opacity-90 max-w-[700px]">
+              Book your perfect movie night with just a few clicks. Latest releases, comfortable seats, and hassle-free booking.
+            </p>
+            <div className="pt-4">
               <Button 
                 onClick={handleGetStarted} 
-                className="bg-ticket-purple hover:bg-ticket-secondary"
+                className="bg-white text-primary hover:bg-white/90 transition-all shadow-lg"
                 size="lg"
               >
                 Get Started
@@ -45,37 +44,51 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="w-full py-12">
-        <div className="container px-4 md:px-6">
-          <h2 className="text-2xl font-bold text-center mb-8">Featured Movies</h2>
+      {/* Featured Movies */}
+      <section className="w-full py-16 bg-white">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Featured Movies</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Check out the latest blockbusters and trending titles available for booking
+            </p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in">
             {movies.slice(0, 4).map((movie) => (
               <div 
                 key={movie.id} 
-                className="overflow-hidden rounded-lg bg-black/40 border border-muted transition-all hover:scale-105"
+                className="movie-card"
               >
-                <div className="aspect-[2/3] relative">
+                <div className="poster">
                   <img
                     src={movie.poster}
                     alt={movie.title}
                     className="object-cover w-full h-full"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end justify-center p-4">
+                    <span className="text-white font-medium">{movie.genre}</span>
+                  </div>
                 </div>
-                <div className="p-4">
-                  <h3 className="font-bold">{movie.title}</h3>
-                  <div className="flex justify-between mt-2 text-xs text-ticket-gray">
-                    <span>{movie.duration}</span>
-                    <span>{movie.genre}</span>
+                <div className="content">
+                  <h3 className="font-bold text-lg mb-1">{movie.title}</h3>
+                  <div className="flex justify-between mt-2 text-xs text-slate-500">
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      <span>{movie.duration}</span>
+                    </div>
+                    <div className="px-2 py-1 bg-primary/10 text-primary rounded-full text-xs">
+                      {movie.rating}
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-10">
             <Button 
               onClick={() => navigate("/movies")} 
               variant="outline"
-              className="border-ticket-purple text-ticket-purple hover:bg-ticket-purple hover:text-white"
+              className="border-primary text-primary hover:bg-primary hover:text-white"
             >
               View All Movies
             </Button>
@@ -83,37 +96,62 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="w-full py-12 bg-black/30">
-        <div className="container px-4 md:px-6">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="rounded-lg border border-muted p-6 flex flex-col items-center text-center">
-              <Film className="h-10 w-10 text-ticket-purple mb-4" />
-              <h3 className="text-xl font-bold">Wide Selection</h3>
-              <p className="text-ticket-gray mt-2">
-                Choose from all the latest blockbusters and indie films
+      {/* Features Section */}
+      <section className="w-full py-16 bg-slate-50">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Why Choose TicketVerse</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">
+              Enjoy a seamless booking experience with premium features
+            </p>
+          </div>
+          <div className="grid gap-8 md:grid-cols-3">
+            <div className="feature-card text-center">
+              <div className="mx-auto">
+                <Film className="feature-icon mx-auto" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Premium Selection</h3>
+              <p className="text-slate-600">
+                Access to all the latest blockbusters and indie gems from around the world
               </p>
             </div>
-            <div className="rounded-lg border border-muted p-6 flex flex-col items-center text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10 text-ticket-purple mb-4">
-                <path d="M4 18v-8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z"/>
-                <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-              </svg>
-              <h3 className="text-xl font-bold">Easy Booking</h3>
-              <p className="text-ticket-gray mt-2">
-                Simple and intuitive interface for quick reservations
+            <div className="feature-card text-center">
+              <div className="mx-auto">
+                <Calendar className="feature-icon mx-auto" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Easy Scheduling</h3>
+              <p className="text-slate-600">
+                Browse showtimes, select seats, and plan your movie night with ease
               </p>
             </div>
-            <div className="rounded-lg border border-muted p-6 flex flex-col items-center text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10 text-ticket-purple mb-4">
-                <rect width="20" height="14" x="2" y="5" rx="2"/>
-                <line x1="2" x2="22" y1="10" y2="10"/>
-              </svg>
-              <h3 className="text-xl font-bold">Secure Payments</h3>
-              <p className="text-ticket-gray mt-2">
-                Fast and secure payment options for your convenience
+            <div className="feature-card text-center">
+              <div className="mx-auto">
+                <ShieldCheck className="feature-icon mx-auto" />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Secure Payments</h3>
+              <p className="text-slate-600">
+                Safe and protected transactions with multiple payment options
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="w-full py-16 bg-primary/5">
+        <div className="container px-4 md:px-6 mx-auto">
+          <div className="glass-card p-8 md:p-12 max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready for the Perfect Movie Experience?</h2>
+            <p className="text-slate-600 mb-6">
+              Join thousands of movie lovers who book their tickets through TicketVerse
+            </p>
+            <Button 
+              onClick={handleGetStarted} 
+              className="bg-primary hover:bg-primary/90 transition-all shadow"
+              size="lg"
+            >
+              Book Your Tickets Now
+            </Button>
           </div>
         </div>
       </section>
