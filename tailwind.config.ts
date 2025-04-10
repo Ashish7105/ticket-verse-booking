@@ -71,7 +71,8 @@ export default {
 					blue: '#1EAEDB',
 					available: '#4a5568',
 					selected: '#48bb78',
-					booked: '#e53e3e'
+					booked: '#e53e3e',
+					red: '#e53e3e'
 				}
 			},
 			borderRadius: {

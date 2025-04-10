@@ -32,7 +32,7 @@
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 262 83% 58%;
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 
   * {
@@ -40,39 +40,26 @@
   }
 
   body {
-    @apply bg-white text-foreground antialiased;
-    background-image: 
-      linear-gradient(rgba(246, 245, 251, 0.8) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(246, 245, 251, 0.8) 1px, transparent 1px);
-    background-size: 40px 40px;
+    @apply bg-slate-50 text-foreground antialiased;
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  .glass-card {
-    @apply bg-white/95 backdrop-blur-sm border border-slate-100 shadow-md rounded-xl;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .movie-poster-card {
+    @apply cursor-pointer transition-all duration-200;
   }
   
-  .glass-morphism {
-    @apply bg-white/90 backdrop-blur-md border border-slate-100 shadow-md rounded-xl;
-  }
-  
-  .seat {
-    @apply w-10 h-10 m-1 rounded-t-lg flex items-center justify-center transition-all cursor-pointer text-sm font-semibold;
-  }
-  
-  .seat-available {
-    @apply bg-slate-200 text-slate-700 hover:bg-primary hover:text-white;
-  }
-  
-  .seat-selected {
-    @apply bg-emerald-500 text-white;
-  }
-  
-  .seat-booked {
-    @apply bg-red-400 text-white cursor-not-allowed opacity-50;
-  }
-  
-  .screen {
-    @apply h-3 bg-primary rounded-lg w-3/4 mx-auto mb-10 shadow-lg shadow-primary/20;
+  .movie-poster-card:hover {
+    @apply transform -translate-y-1;
   }
 
   /* Enhanced animations */
@@ -139,24 +126,6 @@
 
   .movie-card .content {
     @apply p-4;
-  }
-
-  /* Banner gradient */
-  .banner-gradient {
-    background: linear-gradient(to right, rgba(120, 80, 228, 0.8), rgba(83, 56, 158, 0.8));
-  }
-
-  /* Features section */
-  .feature-card {
-    @apply p-6 rounded-xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-3px);
-  }
-
-  .feature-icon {
-    @apply h-12 w-12 text-primary mb-4 p-2 rounded-full bg-primary/10;
   }
 
   /* Typography */
