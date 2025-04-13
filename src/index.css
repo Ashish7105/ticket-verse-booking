@@ -14,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 262 83% 58%;
+    --primary: 0 72% 51%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 217 33% 17%;
@@ -23,7 +23,7 @@
     --muted: 214 32% 91%;
     --muted-foreground: 215 16% 47%;
 
-    --accent: 262 83% 96%;
+    --accent: 0 72% 95%;
     --accent-foreground: 222 47% 11%;
 
     --destructive: 0 85% 60%;
@@ -31,7 +31,7 @@
 
     --border: 214 32% 91%;
     --input: 214 32% 91%;
-    --ring: 262 83% 58%;
+    --ring: 0 72% 51%;
     --radius: 0.5rem;
   }
 
@@ -40,7 +40,7 @@
   }
 
   body {
-    @apply bg-slate-50 text-foreground antialiased;
+    @apply bg-white text-foreground antialiased;
   }
   
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -54,6 +54,7 @@
     scrollbar-width: none;  /* Firefox */
   }
 
+  /* Movie poster card */
   .movie-poster-card {
     @apply cursor-pointer transition-all duration-200;
   }
@@ -93,39 +94,26 @@
     }
   }
 
-  /* Card hover effects */
-  .hover-card {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  /* Seat styling for the seat selection page */
+  .seat {
+    @apply w-8 h-8 flex items-center justify-center m-1 text-xs font-medium cursor-pointer rounded-md transition-colors;
   }
 
-  /* Button hover animations */
-  .btn-animate {
-    @apply relative overflow-hidden transition-all duration-300;
-  }
-  
-  .btn-animate:after {
-    @apply content-[''] absolute top-0 left-[-100%] z-[-1] w-full h-full bg-white/20 transition-all duration-300 transform skew-x-[-15deg];
-  }
-  
-  .btn-animate:hover:after {
-    @apply left-0;
+  .seat-available {
+    @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
   }
 
-  /* Movie card */
-  .movie-card {
-    @apply rounded-xl overflow-hidden bg-white shadow-md hover:shadow-xl transition-all duration-300 border border-slate-100;
+  .seat-selected {
+    @apply bg-green-500 text-white hover:bg-green-600;
   }
 
-  .movie-card:hover {
-    transform: translateY(-5px) scale(1.01);
+  .seat-booked {
+    @apply bg-red-500 text-white cursor-not-allowed opacity-70;
   }
 
-  .movie-card .poster {
-    @apply aspect-[2/3] object-cover w-full relative overflow-hidden;
-  }
-
-  .movie-card .content {
-    @apply p-4;
+  /* Screen styling */
+  .screen {
+    @apply w-4/5 h-4 bg-gray-300 mx-auto mb-12 rounded-t-3xl shadow-lg transform perspective-[800px] rotateX(60deg) shadow-gray-400;
   }
 
   /* Typography */
@@ -143,5 +131,10 @@
 
   h3 {
     @apply text-2xl;
+  }
+
+  /* Glass card effect */
+  .glass-card {
+    @apply bg-white/90 backdrop-blur-md shadow-lg border border-white/20;
   }
 }
