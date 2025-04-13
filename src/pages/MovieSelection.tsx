@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/components/ui/use-toast";
 import { useBooking } from "@/context/BookingContext";
-import { cities, getMovies, getTheaters, getShowTimes, Movie, Theater, ShowTime } from "@/services/mockData";
+import { cities, Movie, Theater, ShowTime } from "@/services/mockData";
+import { getMoviesFromDB, getTheatersFromDB, getShowTimesFromDB } from "@/services/localDatabase";
 import { Loader2 } from "lucide-react";
 
 const MovieSelection = () => {
@@ -31,7 +31,7 @@ const MovieSelection = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const moviesData = await getMovies();
+        const moviesData = await getMoviesFromDB();
         setMovies(moviesData);
       } catch (error) {
         toast({
@@ -52,7 +52,7 @@ const MovieSelection = () => {
       if (selectedCity) {
         try {
           setIsLoading(true);
-          const theatersData = await getTheaters(selectedCity);
+          const theatersData = await getTheatersFromDB(selectedCity);
           setTheaters(theatersData);
           
           // Reset selections when city changes
@@ -79,7 +79,7 @@ const MovieSelection = () => {
       if (selectedTheater && selectedMovie) {
         try {
           setIsLoading(true);
-          const showTimesData = await getShowTimes();
+          const showTimesData = await getShowTimesFromDB();
           setShowTimes(showTimesData);
           setSelectedShowTime(null);
         } catch (error) {

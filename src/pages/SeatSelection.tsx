@@ -1,11 +1,11 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { useBooking } from "@/context/BookingContext";
-import { getSeats, Seat } from "@/services/mockData";
+import { Seat } from "@/services/mockData";
+import { getSeatsFromDB, updateSeatStatus } from "@/services/localDatabase";
 import { Loader2 } from "lucide-react";
 
 const SeatSelection = () => {
@@ -39,7 +39,7 @@ const SeatSelection = () => {
     const fetchSeats = async () => {
       try {
         setIsLoading(true);
-        const seatsData = await getSeats();
+        const seatsData = await getSeatsFromDB();
         setSeats(seatsData);
       } catch (error) {
         toast({
@@ -72,7 +72,7 @@ const SeatSelection = () => {
     return selectedSeats.length * selectedShowTime.price;
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (selectedSeats.length === 0) {
       toast({
         title: "No Seats Selected",
@@ -82,12 +82,27 @@ const SeatSelection = () => {
       return;
     }
 
-    updateBooking({
-      selectedSeats,
-      totalAmount: getTotalAmount(),
-    });
+    try {
+      // Mark selected seats as booked in the database
+      await updateSeatStatus(
+        selectedSeats.map(seat => seat.id),
+        "booked"
+      );
 
-    navigate("/confirmation");
+      updateBooking({
+        selectedSeats,
+        totalAmount: getTotalAmount(),
+      });
+
+      navigate("/confirmation");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to book seats. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Booking error:", error);
+    }
   };
 
   // Organize seats by row
