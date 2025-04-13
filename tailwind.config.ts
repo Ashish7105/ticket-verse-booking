@@ -72,8 +72,15 @@ export default {
 					available: '#4a5568',
 					selected: '#48bb78',
 					booked: '#e53e3e',
-					red: '#e53e3e'
+					red: '#e53e3e',
+					teal: '#0d9488',
+					amber: '#f59e0b',
+					indigo: '#4f46e5'
 				}
+			},
+			fontFamily: {
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				heading: ['Poppins', 'sans-serif']
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

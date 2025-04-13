@@ -6,7 +6,7 @@ import Footer from "./Footer";
 
 const Layout: React.FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-background">
       <Navbar />
       <main className="flex-grow w-full max-w-full">
         <Outlet />
