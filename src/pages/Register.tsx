@@ -32,18 +32,22 @@ const Register = () => {
     setIsLoading(true);
 
     try {
+      console.log("Attempting registration with:", email);
       const success = await register(name, email, password);
       
       if (success) {
+        console.log("Registration successful");
         toast({
           title: "Registration successful",
           description: "Welcome to TicketVerse!",
         });
         navigate("/"); // Navigate to home page
       } else {
+        console.log("Registration failed");
         setError("Registration failed. This email might already be in use.");
       }
     } catch (error) {
+      console.error("Registration error:", error);
       setError("An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false);

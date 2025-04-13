@@ -24,18 +24,22 @@ const Login = () => {
     setIsLoading(true);
 
     try {
+      console.log("Attempting login with:", email);
       const success = await login(email, password);
       
       if (success) {
+        console.log("Login successful");
         toast({
           title: "Login successful",
           description: "Welcome back to TicketVerse!",
         });
         navigate("/"); // Navigate to home page
       } else {
+        console.log("Login failed");
         setError("Invalid email or password. Please try again.");
       }
     } catch (error) {
+      console.error("Login error:", error);
       setError("An unexpected error occurred. Please try again later.");
     } finally {
       setIsLoading(false);

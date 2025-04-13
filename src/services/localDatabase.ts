@@ -178,18 +178,23 @@ export const registerUser = async (name: string, email: string, password: string
   try {
     // Check if user already exists
     const existingUser = await db.users.where('email').equals(email).first();
+    
     if (existingUser) {
+      console.log('User already exists:', email);
       return null; // User already exists
     }
     
     // Create new user
     const userId = `user-${Date.now()}`;
-    await db.users.add({
+    const newUser = {
       id: userId,
       name,
       email,
       password // In a real app, you'd hash this
-    });
+    };
+    
+    await db.users.add(newUser);
+    console.log('User registered successfully:', email);
     
     return userId;
   } catch (error) {
@@ -203,12 +208,24 @@ export const loginUser = async (email: string, password: string): Promise<User |
     // Find user by email
     const user = await db.users.where('email').equals(email).first();
     
-    // Check if user exists and password matches
-    if (user && user.password === password) {
-      const { password, ...userWithoutPassword } = user;
-      return userWithoutPassword as User;
+    if (!user) {
+      console.log('User not found:', email);
+      return null;
     }
     
+    // Check if password matches
+    if (user.password === password) {
+      console.log('Login successful for:', email);
+      // Don't return the password to the client
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        password: '' // We still need to include this for TypeScript, but it's empty
+      };
+    }
+    
+    console.log('Invalid password for:', email);
     return null;
   } catch (error) {
     console.error('Error logging in user:', error);
