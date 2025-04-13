@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -31,6 +32,7 @@ const MovieSelection = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        // getMoviesFromDB now returns MockMovie[] compatible with our component
         const moviesData = await getMoviesFromDB();
         setMovies(moviesData);
       } catch (error) {
@@ -52,6 +54,7 @@ const MovieSelection = () => {
       if (selectedCity) {
         try {
           setIsLoading(true);
+          // getTheatersFromDB now returns MockTheater[] compatible with our component
           const theatersData = await getTheatersFromDB(selectedCity);
           setTheaters(theatersData);
           

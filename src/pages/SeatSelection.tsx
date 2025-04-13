@@ -22,7 +22,6 @@ const SeatSelection = () => {
     updateBooking,
   } = useBooking();
 
-  // Make sure we have the required context data
   useEffect(() => {
     if (!selectedMovie || !selectedTheater || !selectedShowTime) {
       toast({
@@ -34,7 +33,6 @@ const SeatSelection = () => {
     }
   }, [selectedMovie, selectedTheater, selectedShowTime, toast, navigate]);
 
-  // Fetch seats
   useEffect(() => {
     const fetchSeats = async () => {
       try {
@@ -83,7 +81,6 @@ const SeatSelection = () => {
     }
 
     try {
-      // Mark selected seats as booked in the database
       await updateSeatStatus(
         selectedSeats.map(seat => seat.id),
         "booked"
@@ -105,7 +102,6 @@ const SeatSelection = () => {
     }
   };
 
-  // Organize seats by row
   const seatsByRow = seats.reduce<{ [key: string]: Seat[] }>((acc, seat) => {
     if (!acc[seat.row]) {
       acc[seat.row] = [];

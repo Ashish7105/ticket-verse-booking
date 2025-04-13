@@ -1,7 +1,8 @@
 
 import Dexie, { Table } from 'dexie';
+import { Movie as MockMovie, Theater as MockTheater, ShowTime as MockShowTime, Seat as MockSeat, movies, theaters, showTimes, generateSeats } from './mockData';
 
-// Define our types - we need to define them here instead of importing to avoid the errors
+// Define our database types
 export interface Movie {
   id: string;
   title: string;
@@ -12,6 +13,8 @@ export interface Movie {
   rating: string;
   releaseDate: string;
   description: string;
+  // Add poster field to match mockData
+  poster: string;
 }
 
 export interface Theater {
@@ -19,6 +22,8 @@ export interface Theater {
   name: string;
   city: string;
   address: string;
+  // Add location field to match mockData
+  location: string;
 }
 
 export interface ShowTime {
@@ -33,6 +38,7 @@ export interface ShowTime {
 export interface Seat {
   id: string;
   row: string;
+  // Change number to string to match database schema
   number: string;
   status: "available" | "selected" | "booked";
 }
@@ -81,9 +87,54 @@ class TicketVerseDatabase extends Dexie {
 
 export const db = new TicketVerseDatabase();
 
-// Initialize the database with sample data from mockData
-import { movies, theaters, showTimes, generateSeats } from './mockData';
+// Convert mock data to database schema
+const convertMovies = (mockMovies: MockMovie[]): Movie[] => {
+  return mockMovies.map(movie => ({
+    id: movie.id,
+    title: movie.title,
+    genre: movie.genre,
+    language: movie.language,
+    posterUrl: movie.poster, // Use poster as posterUrl
+    duration: movie.duration,
+    rating: movie.rating,
+    releaseDate: '2023-01-01', // Default value since mock doesn't have this
+    description: movie.genre, // Use genre as description since mock doesn't have this
+    poster: movie.poster // Keep the poster field for compatibility
+  }));
+};
 
+const convertTheaters = (mockTheaterArray: MockTheater[]): Theater[] => {
+  return mockTheaterArray.map(theater => ({
+    id: theater.id,
+    name: theater.name,
+    city: theater.city,
+    address: theater.location, // Use location as address
+    location: theater.location // Keep the location field for compatibility
+  }));
+};
+
+const convertShowTimes = (mockShowTimes: MockShowTime[]): ShowTime[] => {
+  // Add dummy movie and theater IDs for the mock data
+  return mockShowTimes.map((showTime, index) => ({
+    id: showTime.id,
+    movieId: `movie${(index % 6) + 1}`, // Cycle through 6 movies
+    theaterId: `ny-theater${(index % 3) + 1}`, // Cycle through 3 theaters
+    date: showTime.date,
+    time: showTime.time,
+    price: showTime.price
+  }));
+};
+
+const convertSeats = (mockSeats: MockSeat[]): Seat[] => {
+  return mockSeats.map(seat => ({
+    id: seat.id,
+    row: seat.row,
+    number: seat.number.toString(), // Convert number to string
+    status: seat.status
+  }));
+};
+
+// Initialize the database with sample data from mockData
 export const initializeDatabase = async (): Promise<void> => {
   try {
     // Check if the database is already populated
@@ -92,22 +143,26 @@ export const initializeDatabase = async (): Promise<void> => {
     if (moviesCount === 0) {
       console.log('Initializing local database with sample data...');
       
-      // Add movies
-      await db.movies.bulkAdd(movies);
+      // Convert and add movies
+      const dbMovies = convertMovies(movies);
+      await db.movies.bulkAdd(dbMovies);
       
-      // Add theaters (flatten the theaters object)
-      const allTheaters: Theater[] = [];
+      // Convert and add theaters
+      const allTheaters: MockTheater[] = [];
       Object.values(theaters).forEach(theaterArray => {
         allTheaters.push(...theaterArray);
       });
-      await db.theaters.bulkAdd(allTheaters);
+      const dbTheaters = convertTheaters(allTheaters);
+      await db.theaters.bulkAdd(dbTheaters);
       
-      // Add showtimes
-      await db.showTimes.bulkAdd(showTimes);
+      // Convert and add showtimes
+      const dbShowTimes = convertShowTimes(showTimes);
+      await db.showTimes.bulkAdd(dbShowTimes);
       
-      // Generate and add seats
-      const seats = generateSeats();
-      await db.seats.bulkAdd(seats);
+      // Convert and add seats
+      const mockSeats = generateSeats();
+      const dbSeats = convertSeats(mockSeats);
+      await db.seats.bulkAdd(dbSeats);
       
       console.log('Database initialization complete!');
     } else {
@@ -161,24 +216,66 @@ export const loginUser = async (email: string, password: string): Promise<User |
   }
 };
 
+// Convert database Movie to mockData Movie for frontend compatibility
+const toMockMovie = (dbMovie: Movie): MockMovie => {
+  return {
+    id: dbMovie.id,
+    title: dbMovie.title,
+    poster: dbMovie.poster || dbMovie.posterUrl,
+    duration: dbMovie.duration,
+    genre: dbMovie.genre,
+    rating: dbMovie.rating,
+    language: dbMovie.language
+  };
+};
+
+// Convert database Theater to mockData Theater for frontend compatibility
+const toMockTheater = (dbTheater: Theater): MockTheater => {
+  return {
+    id: dbTheater.id,
+    name: dbTheater.name,
+    location: dbTheater.location || dbTheater.address,
+    city: dbTheater.city
+  };
+};
+
+// Convert database Seat to mockData Seat for frontend compatibility
+const toMockSeat = (dbSeat: Seat): MockSeat => {
+  return {
+    id: dbSeat.id,
+    row: dbSeat.row,
+    number: parseInt(dbSeat.number),
+    status: dbSeat.status
+  };
+};
+
 // Database operations for movies
-export const getMoviesFromDB = async (): Promise<Movie[]> => {
-  return await db.movies.toArray();
+export const getMoviesFromDB = async (): Promise<MockMovie[]> => {
+  const dbMovies = await db.movies.toArray();
+  return dbMovies.map(toMockMovie);
 };
 
 // Database operations for theaters
-export const getTheatersFromDB = async (city: string): Promise<Theater[]> => {
-  return await db.theaters.where('city').equals(city).toArray();
+export const getTheatersFromDB = async (city: string): Promise<MockTheater[]> => {
+  const dbTheaters = await db.theaters.where('city').equals(city).toArray();
+  return dbTheaters.map(toMockTheater);
 };
 
 // Database operations for showtimes
-export const getShowTimesFromDB = async (): Promise<ShowTime[]> => {
-  return await db.showTimes.toArray();
+export const getShowTimesFromDB = async (): Promise<MockShowTime[]> => {
+  const dbShowTimes = await db.showTimes.toArray();
+  return dbShowTimes.map(showTime => ({
+    id: showTime.id,
+    time: showTime.time,
+    date: showTime.date,
+    price: showTime.price
+  }));
 };
 
 // Database operations for seats
-export const getSeatsFromDB = async (): Promise<Seat[]> => {
-  return await db.seats.toArray();
+export const getSeatsFromDB = async (): Promise<MockSeat[]> => {
+  const dbSeats = await db.seats.toArray();
+  return dbSeats.map(toMockSeat);
 };
 
 // Database operations for bookings
