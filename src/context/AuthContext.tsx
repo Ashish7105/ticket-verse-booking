@@ -1,5 +1,6 @@
 
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { loginUser, registerUser, User as DbUser } from "@/services/localDatabase";
 
 interface User {
   id: string;
@@ -30,23 +31,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // In a real app, you would validate credentials against a backend service
-    // For this demo, we're simulating authentication
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const result = await loginUser(email, password);
       
-      // Dummy validation (in a real app, this would be server-side)
-      if (email && password.length >= 6) {
-        const newUser = {
-          id: `user-${Date.now()}`,
-          name: email.split('@')[0],
-          email
+      if (result) {
+        const authenticatedUser = {
+          id: result.id,
+          name: result.name,
+          email: result.email
         };
         
-        setUser(newUser);
+        setUser(authenticatedUser);
         setIsAuthenticated(true);
-        localStorage.setItem("user", JSON.stringify(newUser));
+        localStorage.setItem("user", JSON.stringify(authenticatedUser));
         return true;
       }
       return false;
@@ -57,16 +54,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
-    // In a real app, you would send registration data to a backend service
-    // For this demo, we're simulating registration
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const userId = await registerUser(name, email, password);
       
-      // Dummy validation (in a real app, this would be server-side)
-      if (name && email && password.length >= 6) {
+      if (userId) {
         const newUser = {
-          id: `user-${Date.now()}`,
+          id: userId,
           name,
           email
         };
