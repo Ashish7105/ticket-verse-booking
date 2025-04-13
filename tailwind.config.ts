@@ -87,6 +87,13 @@ export default {
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
 			},
+			transformOrigin: {
+				"0": "0%",
+			},
+			transitionProperty: {
+				'height': 'height',
+				'spacing': 'margin, padding',
+			},
 			keyframes: {
 				'accordion-down': {
 					from: {

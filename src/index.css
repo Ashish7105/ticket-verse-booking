@@ -136,7 +136,8 @@
 
   /* Screen styling */
   .screen {
-    @apply w-4/5 h-4 bg-gray-300 mx-auto mb-12 rounded-t-3xl shadow-lg transform perspective-[800px] rotateX(60deg) shadow-gray-400;
+    @apply w-4/5 h-4 bg-gray-300 mx-auto mb-12 rounded-t-3xl shadow-lg transform rotateX(60deg) shadow-gray-400;
+    perspective: 800px;
   }
 }
 
