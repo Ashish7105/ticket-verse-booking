@@ -1,4 +1,3 @@
-
 import { Booking } from "@/context/BookingContext";
 
 // Explicitly define and export the types here
@@ -9,6 +8,7 @@ export interface Movie {
   duration: string;
   genre: string;
   rating: string;
+  language: string; // Added the language property
 }
 
 export interface Theater {
@@ -41,7 +41,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg",
     duration: "2h 28m",
     genre: "Sci-Fi, Action",
-    rating: "8.8/10"
+    rating: "8.8",
+    language: "English"
   },
   {
     id: "movie2",
@@ -49,7 +50,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg",
     duration: "2h 32m",
     genre: "Action, Crime, Drama",
-    rating: "9.0/10"
+    rating: "9.0",
+    language: "English"
   },
   {
     id: "movie3",
@@ -57,7 +59,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
     duration: "2h 49m",
     genre: "Adventure, Drama, Sci-Fi",
-    rating: "8.6/10"
+    rating: "8.6",
+    language: "English"
   },
   {
     id: "movie4",
@@ -65,7 +68,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BN2FjNmEyNWMtYzM0ZS00NjIyLTg5YzYtYThlMGVjNzE1OGViXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg",
     duration: "2h 35m",
     genre: "Adventure, Drama, Sci-Fi",
-    rating: "8.0/10"
+    rating: "8.0",
+    language: "English"
   },
   {
     id: "movie5",
@@ -73,7 +77,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
     duration: "2h 23m",
     genre: "Action, Adventure, Sci-Fi",
-    rating: "8.0/10"
+    rating: "8.0",
+    language: "English"
   },
   {
     id: "movie6",
@@ -81,7 +86,8 @@ export const movies: Movie[] = [
     poster: "https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg",
     duration: "2h 2m",
     genre: "Crime, Drama, Thriller",
-    rating: "8.4/10"
+    rating: "8.4",
+    language: "English"
   }
 ];
 
