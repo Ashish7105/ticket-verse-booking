@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -71,7 +70,6 @@ const Index = () => {
     { id: "activities", name: "Activities", icon: <Popcorn className="h-4 w-4" /> }
   ];
 
-  // Helper function to truncate text
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.slice(0, maxLength) + '...';
@@ -79,7 +77,6 @@ const Index = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      {/* Category Tabs */}
       <div className="w-full bg-gray-50 py-3 shadow-sm">
         <div className="container mx-auto px-4">
           <div className="flex space-x-3 overflow-x-auto hide-scrollbar">
@@ -101,7 +98,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Hero Carousel */}
       <section className="w-full py-6 bg-white">
         <div className="container mx-auto px-4">
           <Carousel className="w-full">
@@ -136,7 +132,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Recommended Section */}
       <section className="w-full py-10 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
@@ -182,7 +177,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Events Section */}
       <section className="w-full py-10 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
@@ -234,7 +228,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Trending Movies */}
       <section className="w-full py-10 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-6">
@@ -274,7 +267,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
       <section className="w-full py-10 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="section-title">Explore By Categories</h2>
@@ -300,7 +292,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
       <section className="w-full py-16 bg-gradient-to-r from-primary/90 to-indigo-600 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Experience Entertainment?</h2>
@@ -317,7 +308,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="w-full py-10 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="section-title text-center">What Our Users Say</h2>
