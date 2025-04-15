@@ -35,6 +35,36 @@
     --radius: 0.75rem;
   }
 
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 217 33% 17%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 33% 17%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 258 90% 66%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 258 25% 25%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 25%;
+    --input: 217 33% 25%;
+    --ring: 258 90% 66%;
+  }
+
   * {
     @apply border-border;
   }
@@ -57,7 +87,7 @@
 
   /* Glass card effect */
   .glass-card {
-    @apply bg-white/90 backdrop-blur-sm border border-white/20 shadow-md rounded-lg;
+    @apply bg-card/90 backdrop-blur-sm border border-muted/20 shadow-md rounded-lg;
   }
   
   /* Typography */
@@ -136,15 +166,20 @@
 
   /* Screen styling */
   .screen {
-    @apply w-4/5 h-4 bg-gray-300 mx-auto mb-12 rounded-t-3xl shadow-lg transform shadow-gray-400;
+    @apply w-4/5 h-3 bg-ticket-purple/50 mx-auto rounded-t-3xl shadow-lg transform shadow-ticket-purple/40;
     perspective: 800px;
-    transform: rotateX(60deg);
+    transform: rotateX(40deg);
+  }
+
+  /* Dark mode enhancements */
+  .dark .glass-card {
+    @apply bg-card/30 border-white/10;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply text-gray-700 hover:text-primary transition-colors font-medium;
+    @apply text-foreground hover:text-ticket-purple transition-colors font-medium;
   }
   
   .category-button {
@@ -152,10 +187,15 @@
   }
   
   .section-title {
-    @apply text-2xl font-bold text-gray-800 mb-6;
+    @apply text-2xl font-bold text-foreground mb-6;
   }
   
   .card-hover {
     @apply transition-all duration-300 hover:shadow-md hover:-translate-y-1;
+  }
+
+  /* Dark mode specific styles */
+  .dark .nav-link {
+    @apply text-muted-foreground hover:text-ticket-purple;
   }
 }
