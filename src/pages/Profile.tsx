@@ -23,16 +23,24 @@ import {
   Calendar
 } from "lucide-react";
 
+// Custom interface to extend User type
+interface ExtendedUser {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+}
+
 const Profile = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("account");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ExtendedUser>({
     name: user?.name || "",
     email: user?.email || "",
-    phone: user?.phone || "",
-    address: user?.address || "",
+    phone: "",  // Default to empty string
+    address: "", // Default to empty string
   });
 
   if (!isAuthenticated) {

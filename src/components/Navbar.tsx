@@ -24,7 +24,7 @@ import {
   Tag,
   Gift,
   Popcorn,
-  MicStage as Mic,
+  Mic,
   LogOut,
   Settings,
   History,
