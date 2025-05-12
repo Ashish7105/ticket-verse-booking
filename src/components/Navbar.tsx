@@ -49,16 +49,16 @@ const Navbar: React.FC = () => {
     "Los Angeles", 
     "Chicago", 
     "Houston", 
-    "Phoenix", 
-    "Philadelphia", 
+   // "Phoenix", 
+   // "Philadelphia", 
     "San Antonio", 
     "San Diego", 
     "Dallas", 
     "Austin",
     "San Francisco",
-    "Seattle",
+   // "Seattle",
     "Denver",
-    "Boston",
+   // "Boston",
     "Las Vegas"
   ];
 

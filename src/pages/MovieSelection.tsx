@@ -121,11 +121,9 @@ const MovieSelection = () => {
 
   // More cities
   const extendedCities = [
-    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", 
-    "Philadelphia", "San Antonio", "San Diego", "Dallas", "Austin",
-    "San Francisco", "Seattle", "Denver", "Washington DC", "Boston",
-    "Las Vegas", "Atlanta", "Miami", "Portland", "Detroit",
-    ...cities
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Austin"
+   , "Denver", "Washington DC", "Atlanta", "Miami",
+    
   ];
 
   return (
